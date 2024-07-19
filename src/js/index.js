@@ -8,7 +8,7 @@ const labelsLevels = document.querySelectorAll('.level label');
 const reStartButtonElement = document.getElementById('restart-button');
 
 const resetPage = () => {
-    boardContainer.textContent = ''
+  boardContainer.textContent = '';
   inputLevels.forEach(input => {
     input.disabled = false;
   });
@@ -25,9 +25,10 @@ const createNumbers = () => {
     }
   }
 
-  return numbers
+  return numbers;
 };
 
+/*
 const createBoard = () => {
     resetPage()
   const fragment = document.createDocumentFragment();
@@ -52,6 +53,41 @@ const createBoard = () => {
 
   boardContainer.append(fragment);
 };
+*/
+
+const createBoard = () => {
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < 9; i++) {
+    const bigContainer = document.createElement('div');
+
+    bigContainer.classList.add('board__card');
+
+
+    for (let j = 0; j < 3; j++) {
+      const smallContainer = document.createElement('div')
+
+      smallContainer.classList.add('board__card2')
+      for(let k= 0; k<3;k++){
+        const input = document.createElement('input');
+
+        input.classList.add('board__input');
+        
+        
+
+        smallContainer.append(input);
+        
+      }
+
+      
+
+      bigContainer.append(smallContainer)
+    }
+
+    fragment.append(bigContainer);
+  }
+
+  boardContainer.append(fragment);
+};
 
 const chooseDifficulty = () => {
   inputLevels.forEach(input => {
@@ -65,11 +101,14 @@ const chooseDifficulty = () => {
 };
 
 const createGame = () => {
-  const inputs = document.querySelectorAll('.board__input');
-  //console.log(inputs)
+  const inputs = document.querySelectorAll('.board__card');
+  console.log(inputs)
   for (let i = 0; i < inputs.length; i++) {
-    console.log(inputs[i])
-    
+    //console.log(inputs[i].children);
+    for (let j = 0; j<3; j++){
+      console.log(inputs[i].children[j])
+      
+    }
   }
 };
 
