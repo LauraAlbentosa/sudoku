@@ -16,18 +16,26 @@ const resetPage = () => {
 
 const createNumbers = () => {
   let numbers = [];
+  let row1 = [];
+  let row2 = [];
+  let row3 = [];
 
   while (numbers.length !== 9) {
     const number = Math.ceil(Math.random() * 9);
     if (!numbers.includes(number)) {
       numbers.push(number);
-      //console.log(number);
+      //console.log(row1);
     }
   }
+
+  //console.log(numbers + '    ' +row1)
+  //console.log(numbers + '    ' +row2)
+  //console.log(numbers + '    ' +row3)
 
   return numbers;
 };
 
+//createNumbers()
 /*
 const createBoard = () => {
     resetPage()
@@ -57,37 +65,47 @@ const createBoard = () => {
 
 const createBoard = () => {
   const fragment = document.createDocumentFragment();
+  
   for (let i = 0; i < 9; i++) {
     const bigContainer = document.createElement('div');
 
     bigContainer.classList.add('board__card');
 
+    let numbers = createNumbers();
+    let test = [];
+
+    let row1 = numbers.slice(0, 3);
+    let row2 = numbers.slice(3, 6);
+    let row3 = numbers.slice(6, 9);
+
+    test.push(row1, row2, row3);
+
+    //console.log(test);
 
     for (let j = 0; j < 3; j++) {
-      const smallContainer = document.createElement('div')
+      const smallContainer = document.createElement('div');
 
-      smallContainer.classList.add('board__card2')
-      for(let k= 0; k<3;k++){
+      smallContainer.classList.add('board__card2');
+      for (let k = 0; k < 3; k++) {
         const input = document.createElement('input');
 
         input.classList.add('board__input');
-        
-        
+        input.value = test[j][k];
 
         smallContainer.append(input);
-        
       }
 
-      
-
-      bigContainer.append(smallContainer)
+      bigContainer.append(smallContainer);
     }
 
     fragment.append(bigContainer);
   }
 
   boardContainer.append(fragment);
+ 
 };
+
+
 
 const chooseDifficulty = () => {
   inputLevels.forEach(input => {
@@ -101,15 +119,30 @@ const chooseDifficulty = () => {
 };
 
 const createGame = () => {
+  
+  
+  let row2 = []
+  let row3 = []
   const inputs = document.querySelectorAll('.board__card');
-  console.log(inputs)
+  //console.log(inputs)
   for (let i = 0; i < inputs.length; i++) {
+    
     //console.log(inputs[i].children);
-    for (let j = 0; j<3; j++){
-      console.log(inputs[i].children[j])
-      
+    for (let j = 0; j < 3; j++) {
+      let row1 = []
+      //console.log(inputs[i].children[j].children)
+      row3 = row1
+      for (let k = 0; k < 3; k++) {
+        //console.log(inputs[i].children[j].children[k].value)
+        
+        row1.push(inputs[i].children[j].children[k].value)
+        
+       
+      }
     }
   }
+
+  
 };
 
 const reStart = () => {
