@@ -12,6 +12,7 @@
     display: grid;
     grid-template-columns: 225px;
     grid-template-rows: repeat(3, 75px);
+    //grid-template-columns: repeat(3, 75px);
     &2{
       display: grid;
       grid-template-columns: repeat(3,75px);
