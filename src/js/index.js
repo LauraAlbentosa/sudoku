@@ -7,277 +7,84 @@ const inputLevels = document.querySelectorAll('.level input');
 const labelsLevels = document.querySelectorAll('.level label');
 const reStartButtonElement = document.getElementById('restart-button');
 
-const createNumbers = () => {
-  let numbers = [];
+const createBoard = () => {
+  const fragment = document.createDocumentFragment();
 
-  while (numbers.length !== 9) {
+  for (let i = 0; i < 9; i++) {
+    const newRow = document.createElement('div');
+
+    newRow.classList.add('board__card');
+
+    for (let i = 0; i < 9; i++) {
+      const newColum = document.createElement('input');
+
+      newColum.classList.add('board__input');
+
+      newRow.append(newColum);
+    }
+
+    fragment.append(newRow);
+  }
+
+  boardContainer.append(fragment);
+};
+
+const fillArray = ( array) => {
+  while (array.length < 9) {
     const number = Math.ceil(Math.random() * 9);
-    if (!numbers.includes(number)) {
-      numbers.push(number);
-      //console.log(row1);
-    }
+    if (!array.includes(number)) {
+      array.push(number);
+    } 
   }
-
-  //console.log(numbers + '    ' +row1)
-  //console.log(numbers + '    ' +row2)
-  //console.log(numbers + '    ' +row3)
-
-  return numbers;
 };
 
-const createBoard = () => {
-  const fragment = document.createDocumentFragment();
+const createArrayValues = () => {
 
-  for (let i = 0; i < 9; i++) {
-    const bigContainer = document.createElement('div');
+  let arrayBoard = [];
 
-    bigContainer.classList.add('board__card');
-
-    //console.log(test);
-
-    for (let j = 0; j < 3; j++) {
-      const smallContainer = document.createElement('div');
-
-      smallContainer.classList.add('board__card2');
-      for (let k = 0; k < 3; k++) {
-        const input = document.createElement('input');
-
-        input.classList.add('board__input');
-
-        smallContainer.append(input);
-      }
-
-      bigContainer.append(smallContainer);
+  for (let row = 0; row < 9; row++) {
+    let newRowArray = [];
+    for (let colum = 0; colum < 9; colum++) {
+      fillArray(newRowArray)
     }
 
-    fragment.append(bigContainer);
+    arrayBoard.push(newRowArray);
   }
 
-  boardContainer.append(fragment);
+  console.log(arrayBoard);
 };
-
-const fillBoard = () => {
-  const inputs = document.querySelectorAll('.board__card');
-  //console.log(inputs[0].children);
-
-  let numbers = createNumbers();
-  let squareValues = [];
-
-  let row1 = numbers.slice(0, 3);
-  let row2 = numbers.slice(3, 6);
-  let row3 = numbers.slice(6, 9);
-
-  squareValues.push(row1, row2, row3);
-
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      const input = inputs[0].children[i].children[j];
-
-      input.value = squareValues[i][j];
-    }
-  }
-
-  return squareValues;
-  //const newORder = reOrderNumbers(inputs[0].children)
-};
-
-const fillPart2 = ()=>{
-  const squareValues = fillBoard()
-  const inputs =document.querySelectorAll('.board__card2')
-
-  for ( let i = 1; i<9;i++){
-    
-  }
-
-  console.log(squareValues)
-}
-
-const reOrderColums = array => {
-  let newArray = [];
-
-  newArray.push(array[2], array[0], array[1]);
-
-  console.log(newArray);
-
-  return newArray;
-};
-
-const reOrderRows = arrays =>{
-  for (const array of arrays){
-    const newArray = testFunction(array)
-    console.log(array + ' - ' + newArray)
-  }
-}
-
 createBoard();
-fillBoard()
-fillPart2()
-
-/*
-const array = [[1,2,3], [4,5,6], [7,8,9]]
-const arrayb = [1,2,3]
-const testFunction = array =>{
-  let newArray = []
-
-  newArray.push(array[2], array[0], array[1])
-
-  console.log(newArray)
-
-  return newArray
-}
-//testFunction(array)
-const reOrder = arrays =>{
-  for (const array of arrays){
-    const newArray = testFunction(array)
-    console.log(array + ' - ' + newArray)
-  }
-}
-reOrder(array)
-*/
-
-/*
-const resetPage = () => {
-  boardContainer.textContent = '';
-  inputLevels.forEach(input => {
-    input.disabled = false;
-  });
-};
-
-const createNumbers = () => {
-  let numbers = [];
-
-  while (numbers.length !== 9) {
-    const number = Math.ceil(Math.random() * 9);
-    if (!numbers.includes(number)) {
-      numbers.push(number);
-      //console.log(row1);
-    }
-  }
-
-  //console.log(numbers + '    ' +row1)
-  //console.log(numbers + '    ' +row2)
-  //console.log(numbers + '    ' +row3)
-
-  return numbers;
-};
-
-//createNumbers()
-
-const createBoard = () => {
-    resetPage()
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < 9; i++) {
-    const bigContainer = document.createElement('div');
-
-    bigContainer.classList.add('board__card');
-    
-    const numbers = createNumbers()
-
-    for (let j = 0; j < 9; j++) {
-      const input = document.createElement('input');
-
-      input.classList.add('board__input');
+//createArrayValues();
 
 
-      bigContainer.append(input);
-    }
+const test = [[1,2,3],[4,5,6],[7,8,9]]
 
-    fragment.append(bigContainer);
-  }
+//console.log(test[0].includes(3))
 
-  boardContainer.append(fragment);
-};
+const arrayTest = (array) =>{
+  let newBigArray = []
 
+  for(let i = 0; i<3; i++){
+    let newSmallArray = []
 
-const createBoard = () => {
-  const fragment = document.createDocumentFragment();
-  
-  for (let i = 0; i < 9; i++) {
-    const bigContainer = document.createElement('div');
+    while (newSmallArray.length <3){
+      const number = Math.ceil(Math.random()*9)
 
-    bigContainer.classList.add('board__card');
-
-    let numbers = createNumbers();
-    let test = [];
-
-    let row1 = numbers.slice(0, 3);
-    let row2 = numbers.slice(3, 6);
-    let row3 = numbers.slice(6, 9);
-
-    test.push(row1, row2, row3);
-
-    //console.log(test);
-
-    for (let j = 0; j < 3; j++) {
-      const smallContainer = document.createElement('div');
-
-      smallContainer.classList.add('board__card2');
-      for (let k = 0; k < 3; k++) {
-        const input = document.createElement('input');
-
-        input.classList.add('board__input');
-        input.value = test[j][k];
-
-        smallContainer.append(input);
-      }
-
-      bigContainer.append(smallContainer);
-    }
-
-    fragment.append(bigContainer);
-  }
-
-  boardContainer.append(fragment);
- 
-};
-
-const chooseDifficulty = () => {
-  inputLevels.forEach(input => {
-    if (input.checked) {
-      const level = input.id;
-      return level;
-    } else {
-      input.disabled = true;
-    }
-  });
-};
-
-const createGame = () => {
-  let row2 = []
-  let row3 = []
-  const inputs = document.querySelectorAll('.board__card');
-  //console.log(inputs)
-  for (let i = 0; i < inputs.length; i++) {
-    
-    //console.log(inputs[i].children);
-    for (let j = 0; j < 3; j++) {
-      let row1 = []
-      //console.log(inputs[i].children[j].children)
-      row3 = row1
-      for (let k = 0; k < 3; k++) {
-        //console.log(inputs[i].children[j].children[k].value)
+      if(!newSmallArray.includes(number) && !array[i].includes(number)){
+        newSmallArray.push(number)
         
-        row1.push(inputs[i].children[j].children[k].value)
-        
-       
       }
+      
     }
+
+    
+
+    newBigArray.push(newSmallArray)
+    
   }
 
-  
-};
+  console.log(newBigArray)
 
-const reStart = () => {
-  resetPage();
-  chooseDifficulty();
-};
+}
 
-//sresetPage();
-
-startButtonElement.addEventListener('click', createGame);
-reStartButtonElement.addEventListener('click', reStart);
-
-createBoard();
-//console.log(inputLevels);
-
-*/
+arrayTest(test)
